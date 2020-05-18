@@ -29,7 +29,7 @@
            $a1 = array_merge(unserialize($arr),$a);
            $a2 = serialize(array_unique($a1,SORT_STRING));
 
-           $sql1 = "UPDATE mastergrp SET member=$a2 WHERE username='$uname' AND gname-'$gname' ";
+           $sql1 = "UPDATE mastergrp SET member=$a2 WHERE username='$uname' AND gname='$gname' ";
            if(mysqli_query($con,$sql))
            {
               
@@ -53,7 +53,7 @@
             $a3 = array_merge($arr2,$arr1);
             $a4 = serialize(array_unique($a3,SORT_STRING));
 
-            $query1 = "UPDATE info SET gnames='$a4' WHERE username='$uname' ";
+            $query1 = "UPDATE info SET gnames='$a4' WHERE username='$member' ";
             if(mysqli_query($con,$query)){
                 echo '<script type="text/javascript">alert("Member Added to '.$gname.' Successfully");</script>';
                 header("refresh:0; url= membersgroup.php");
