@@ -47,6 +47,8 @@ member VARCHAR(255)
 
 mysqli_query($conn, $sql2);
 
+header("refresh:0; url= index.html");
+
 
 
 ?>

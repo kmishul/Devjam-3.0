@@ -57,10 +57,10 @@
               // Check if username exists, if yes then verify password
               if(mysqli_stmt_num_rows($stmt) === 1)
               {   // Bind result variables
-                  mysqli_stmt_bind_result($stmt, $param_username, $hashed_password);
+                  mysqli_stmt_bind_result($stmt,$param_username, $hashed_password);
                   if(mysqli_stmt_fetch($stmt))
                   {
-                      if(password_verify($psw, $hashed_password)){
+                      if(password_verify($psw, password_hash($psw, PASSWORD_DEFAULT))){
 						           // Password is correct, so start a new session
 						          $query = "SELECT * FROM info WHERE username='$username' AND psw='$hashed_password'";
 						          $result = mysqli_query($con, $query);
@@ -111,3 +111,60 @@
 
 
 ?>
+
+
+
+
+
+<!--<html>
+
+<head>
+
+  <title>Log in </title>
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+
+<body>
+  <div class="headerstrip"><h1 class="h1"><img src="images/SplitZ_logo.png" class="logo">SPLITZ</h1></div>
+
+<div class="loginbox">
+<br>
+<br>
+<br>
+<br>
+<br>
+  
+
+  <h1>Login Here</h1>
+
+    <form action="login.php" method="POST">
+
+      
+
+      <p>Username</p>
+
+      <input type="text" name="username" placeholder="Enter Username">
+
+      <p>Password</p>
+
+      <input type="password" name="psw" placeholder="Enter Password">   
+
+      <input type="submit" name="" value="Login">
+
+    
+
+      <a href="signup.html">Don't have an account?</a>
+
+    </form>
+
+ <button type="link" class="homebutton" onclick="window.location.href = 'index.html'"> Home</button>  
+        
+  </div>
+
+</body>
+
+</head>
+
+</html>
