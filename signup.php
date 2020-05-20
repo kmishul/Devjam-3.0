@@ -100,7 +100,7 @@
         else{
         echo $err;
         echo "Go Back To HomePage";
-        header("refresh:2; url= index.html")
+        header("refresh:2; url= index.html");
         }
 
         mysqli_close($con);
@@ -112,3 +112,44 @@
   
 
 ?>
+
+
+
+
+
+<!--<html>
+<head><title>Sign up page</title>
+<link rel="stylesheet" type="text/css" href="css/style1.css">
+</head>
+<body class="body">
+<div class="headerstrip">
+<h1 class="h1"><img src="images/Splitz_logo.png" class="logo"><center> SPLITZ</center></h1>
+</div><br><center>
+        <button type="link" class="homebutton" onclick="window.location.href = 'index.html'"> HOME</button>  
+<div class="divstyle">
+<form action="signup.php" method="POST">
+<center><h1 class ="h1"> JOIN US   </h1></center>
+<p class="p">First Name
+<input type="text" name="fname" placeholder="First Name">
+<p class="p">Last Name<input type="text" name="lname" placeholder="Last Name"></p>
+<p class="p">UserName
+<input type="text" name="username" placeholder="Enter Username"></p>
+<p class="p">Password
+<input type="password" name="psw" placeholder="Password"></p>
+<p class="p">Confirm Password
+<input type="password" name="cpsw" placeholder="Confirm password"></p>
+<p class="p">E-mail id 
+<input type="text" name="email" placeholder="Enter valid E-mail"></p>
+<p class="p">Date of Birth
+<input type="numeric" name="bday" placeholder="DOB"></p>
+<button class="button">SIGN UP</a></button></p>
+</div>
+</form>
+<br><br><br>
+<footer >
+    <div class="footerstrip" >
+   <h1 class="h22">Copyright &copy; Splitz.in</h1>
+    </div>
+  </footer>
+</body>
+</html>
