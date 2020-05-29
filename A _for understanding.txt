@@ -1,0 +1,6 @@
+For understanding purpose only-
+
+- Open index.html as it is home page of our website.
+- for connection to server first open config.php file then proceed.
+
+THANK YOU

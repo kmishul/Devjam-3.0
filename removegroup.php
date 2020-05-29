@@ -43,14 +43,14 @@
           header("refresh:0; url= friendsgroup.php");
        } else {
          echo "Error updating record: " . mysqli_error($con);
-         header("refresh:0; url= location: friendsgroup.php");
+         header("refresh:0; url= location: friendgroup.php");
        }
         }
         else{
             echo '<script type="text/javascript">
           alert("No Group With Name '.$rname.' Exist :|");
         </script>';
-          header("refresh:0; url= friendsgroup.php");
+          header("refresh:0; url= friendgroup.php");
         }
 
        mysqli_close($con);

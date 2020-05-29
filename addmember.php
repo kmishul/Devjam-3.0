@@ -8,69 +8,63 @@
         header("refresh:1; url = profile.php");
     }
 
-    else if(empty($_POST["gname"]) || empty($_POST["uname"]) || empty($_POST["month"]) || empty($_POST["amount"])){
+    else if(empty($_POST["gname"])){
 
-        exit("One Or More Fields are Empty :( ");
+        exit("Enter A Valid Group Name");
 
     }
-    else{
+    else
+    {
         session_start();
-        $uname = $_SESSION["username"]; //Username
-        $arr = $_SESSION["gnames"];       //Array of group names
+        $uname = $_SESSION["username"];
+        $member = $_POST["membername"];
         $gname = $_POST["gname"];
-        $admin = $_POST["uname"];
-        $month = $_POST["month"];
-        $amount = $_POST["amount"];
-        
-        $table = $gname.$admin;
 
-        $sql = "SELECT ".$month." FROM ".$table." WHERE member = '$uname' ";
+        $sql = "SELECT member FROM mastergrp WHERE username='$uname' AND gname='$gname' ";
+        $result = mysqli_query($con,$sql);
+        if($result){
 
-        $result = mysqli_query($con, $sql);
-        $a = mysqli_fetch_array($result);
+           $arr = mysqli_fetch_array($result);
+           $a = array($member);
+           $a1 = array_merge(unserialize($arr),$a);
+           $a2 = serialize(array_unique($a1,SORT_STRING));
 
-        $present_value = $a["$month"];
-
-        if($a){
-           
-          $value = (int)$present_value + (int)$amount;
-
-          $sql1 = "UPDATE $table SEt $month='$value' WHERE member='$uname' ";
-          if(mysqli_query($con, $sql1)){
-            echo '<script  type="text/javascript">alert("Amount Rs. '.$amount.' Added Successfully");</script>';
-            header("refresh:0; url= friends.php");
-          }
-          else{
-            echo '<script  type="text/javascript">alert("Error In Adding Expense, Check Entries");</script>';
-          }
-
+           $sql1 = "UPDATE mastergrp SET member=$a2 WHERE username='$uname' AND gname='$gname' ";
+           if(mysqli_query($con,$sql))
+           {
+              
+           }
+           else{
+               echo "ERROR";
+               header("refresh:2; url= membersgroup.php");
+           }
         }
         else{
-          echo "THERE IS SOME ERROR :/ ";
-          header("refresh:2; url= friends.php");
+            echo "ERROR ";
+            header("refresh:2; url= friends.php");
         }
-        
 
+        $query = "SELECT gnames FROM info WHERE username='$member' ";
+        $result1 = mysqli_query($con,$query);
+        if($result1){
 
-      //   if (mysqli_query($con, $sql) && mysqli_query($con, $sql1)) {
+            $arr1 = mysqli_fetch_array($result1);
+            $arr2 = unserialize($arr1);
+            $a3 = array_merge($arr2,$arr1);
+            $a4 = serialize(array_unique($a3,SORT_STRING));
 
-      //     $_SESSION["gnames"]=$a1;
+            $query1 = "UPDATE info SET gnames='$a4' WHERE username='$member' ";
+            if(mysqli_query($con,$query)){
+                echo '<script type="text/javascript">alert("Member Added to '.$gname.' Successfully");</script>';
+                header("refresh:0; url= membersgroup.php");
+            }
+            else{
+                echo "Error in Adding Member";
+                header("refresh:2; url= membersgroup.php");
+            }
 
-      //     echo '<script type="text/javascript">
-      //     alert("Group Added Successfully :)");
-      //   </script>';
-      //     header("refresh:0; url= friendsgroup.php");
-      //  } else {
-      //    echo "Error updating record: " . mysqli_error($con);
-      //    header("refresh:0; url= location: friends.php");
-      //  }
-       mysqli_close($con);
-
-
+        }
     }
-    mysqli_close($con);
-
 
 
 ?>
-
